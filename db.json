@@ -1,0 +1,108 @@
+{
+  "heroes": [
+    {
+      "id": "3d2b10a5-cba8-4c28-814f-446e17f7143d",
+      "alias": "Superman",
+      "name": "Clark Kent",
+      "birthdate": "1938-04-18",
+      "publishin": "DC Comics"
+    },
+    {
+      "id": "8e530c69-273f-49c4-a766-a07a5b0d6303",
+      "alias": "Batman",
+      "name": "Bruce Wayne",
+      "birthdate": "1939-05-01",
+      "publishin": "DC Comics"
+    },
+    {
+      "id": "5c9a57a2-93d1-4043-b7bf-a5776c7aa7e1",
+      "alias": "Wonder Woman",
+      "name": "Diana Prince",
+      "birthdate": "1941-10-25",
+      "publishin": "DC Comics"
+    },
+    {
+      "id": "4d6a32e5-ec83-4ff9-bc2f-b162f3bac48f",
+      "alias": "Flash",
+      "name": "Barry Allen",
+      "birthdate": "1956-10-04",
+      "publishin": "DC Comics"
+    },
+    {
+      "id": "29a72867-73e2-4c53-b1a3-7619ef8d54a1",
+      "alias": "Spider-Man",
+      "name": "Peter Parker",
+      "birthdate": "1962-08-15",
+      "publishin": "Marvel Comics"
+    },
+    {
+      "id": "5d5a197b-3c52-4c9b-91a2-bd6c9bf1e5c2",
+      "alias": "Witchblade",
+      "name": "Sara Pezzini",
+      "birthdate": "1995-11-01",
+      "publishin": "Image Comics"
+    },
+    {
+      "id": "15a9f3ec-e9e6-4b2c-8d1d-c809fc8c6b1b",
+      "alias": "Iron Man",
+      "name": "Tony Stark",
+      "birthdate": "1963-03-01",
+      "publishin": "Marvel Comics"
+    },
+    {
+      "id": "5d06ca2c-d5e0-4d22-9669-698cf1f0a830",
+      "alias": "Thor",
+      "birthdate": "1962-08-01",
+      "publishin": "Marvel Comics"
+    },
+    {
+      "id": "7f5e79ee-5705-4d32-bd7b-468dbb56f1ea",
+      "alias": "Captain America",
+      "name": "Steve Rogers",
+      "birthdate": "1941-03-01",
+      "publishin": "Marvel Comics"
+    },
+    {
+      "id": "1c6f46c3-7002-4b66-9008-3e988d2157a2",
+      "alias": "Spawn",
+      "name": "Al Simmons",
+      "birthdate": "1992-05-01",
+      "publishin": "Image Comics"
+    },
+    {
+      "id": "0d8407a0-f5b9-4d9c-b11f-8f7d6a2bce3d",
+      "alias": "Hulk",
+      "name": "Bruce Banner",
+      "birthdate": "1962-05-01",
+      "publishin": "Marvel Comics"
+    },
+    {
+      "id": "937eccaf-2875-4203-b6a7-b057ab7880e6",
+      "alias": "Black Widow",
+      "name": "Natasha Romanoff",
+      "birthdate": "1964-04-01",
+      "publishin": "Marvel Comics"
+    },
+    {
+      "id": "5cfe8b4b-2a80-47de-bdd5-ae31c13e96b7",
+      "alias": "Green Lantern",
+      "name": "Hal Jordan",
+      "birthdate": "1959-10-01",
+      "publishin": "DC Comics"
+    },
+    {
+      "id": "5a9dbdf0-67f6-437c-8a56-ba4bfc9c21c1",
+      "alias": "Aquaman",
+      "name": "Arthur Curry",
+      "birthdate": "1941-11-01",
+      "publishin": "DC Comics"
+    },
+    {
+      "id": "8b383f08-05b1-4668-b3a5-224ded586c7f",
+      "alias": "Invincible",
+      "name": "Mark Grayson",
+      "birthdate": "2003-01-01",
+      "publishin": "Image Comics"
+    }
+  ]
+}
