@@ -1,1 +1,63 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: "Roboto", sans-serif;
+  min-height: 100vh;
+  background-color: #eee2de;
+  background-image: url("/assets/images/wickedbackground.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  margin: 0px;
+}
+
+.header-container {
+  background-color: #2b2a4c;
+  color: #ffffff;
+  padding: 20px 0 20px 0;
+  text-align: center;
+}
+
+.footer-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px 20px;
+  text-align: right;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 0.7em;
+  font-weight: 100;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #2b2a4c;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+nav li {
+  float: left;
+}
+
+.navButtonActive {
+  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8); 
+
+}
+
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

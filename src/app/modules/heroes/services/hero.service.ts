@@ -38,6 +38,6 @@ export class HeroService {
 
   searchHeroes(query: string): Hero[] {
     const loweredQuery = query.toLowerCase();
-    return this.heroes.filter(hero => hero.name.toLowerCase().includes(loweredQuery));
+    return this.heroes.filter(hero => hero.alias.toLowerCase().includes(loweredQuery));
   }
 }
