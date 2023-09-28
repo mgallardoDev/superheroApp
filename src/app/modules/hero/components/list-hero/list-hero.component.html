@@ -10,7 +10,7 @@
   </div>
   <div >
         <button mat-raised-button (click)="navigateToView('create')">Crear Héroe</button>
-          <button mat-raised-button (click)="navigateToView('edit')">Editar Héroe</button>
+          <button [disabled]="!selectedHero" mat-raised-button (click)="navigateToView('edit')">Editar Héroe</button>
   </div>
 </div>
     <mat-table
@@ -26,10 +26,6 @@
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef> Nombre Real </mat-header-cell>
         <mat-cell *matCellDef="let hero"> {{ hero.name }} </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="birthdate">
-        <mat-header-cell *matHeaderCellDef> Fecha nacimiento </mat-header-cell>
-        <mat-cell *matCellDef="let hero"> {{ hero.birthdate }} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="publishin">
         <mat-header-cell *matHeaderCellDef> Editorial </mat-header-cell>

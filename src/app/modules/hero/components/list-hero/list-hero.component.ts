@@ -34,7 +34,7 @@ export class ListHeroComponent implements OnInit, OnDestroy {
   searchTerm$ = new Subject<any>();
   pageSize: number = 10;
   pageIndex = 1;
-  displayedColumns: string[] = ['alias', 'name', 'birthdate', 'publishin'];
+  displayedColumns: string[] = ['alias', 'name', 'publishin'];
   private queryParameter: string = '';
 
   constructor(private heroService: HeroService) {}

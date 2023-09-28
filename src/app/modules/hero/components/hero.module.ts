@@ -6,6 +6,7 @@ import { HeroComponent } from './hero.component';
 import { CreateHeroComponent } from './create-hero/create-hero.component';
 import { ListHeroComponent } from './list-hero/list-hero.component';
 import { EditHeroComponent } from './edit-hero/edit-hero.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,12 @@ import { EditHeroComponent } from './edit-hero/edit-hero.component';
     ListHeroComponent,
     EditHeroComponent,
   ],
-  imports: [CommonModule, SharedModule, HeroRoutingModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    HeroRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class HeroesModule {}

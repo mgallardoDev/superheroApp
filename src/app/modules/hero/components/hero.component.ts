@@ -9,8 +9,9 @@ import { HeroService } from '../services/hero.service';
   styleUrls: ['./hero.component.css'],
 })
 export class HeroComponent implements OnInit {
+  activeView: 'list' | 'create' | 'edit' = 'list';
   heroState$ = this.heroService.state$;
-  binds = new Subscription()
+  binds = new Subscription();
 
   constructor(private heroService: HeroService) {}
 
@@ -18,5 +19,7 @@ export class HeroComponent implements OnInit {
     this.heroService.searchHeroes();
   }
 
-
+  setView(view: 'list' | 'create' | 'edit') {
+    this.activeView = view;
+  }
 }
