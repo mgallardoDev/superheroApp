@@ -52,7 +52,6 @@ body {
   box-sizing: border-box;
   font-size: 1rem;
   font-weight: 100;
-  height: ;
 }
 
 nav ul {
@@ -82,10 +81,42 @@ nav li {
   height: calc(100vh - 12.4rem - 4rem);
 
 }
-
 mat-card {
   width: 60%;
   margin: 0 auto;
   padding: 2rem;
   background-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.table-top {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.table-top > * {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  gap: 1rem
+}
+
+.table-container {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.list-container {
+  background-color: rgba(255, 255, 255, 0) !important;
+}
+
+.list-container > * {
+  background-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+mat-paginator {
+  background-color: rgba(255, 255, 255, 0.6) !important;
+}
+.selected {
+  background-color: rgba(103, 103, 103, 0.7) !important;
 }

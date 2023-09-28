@@ -8,7 +8,10 @@ const routes: Routes = [
   },
   {
     path: 'heroes',
-    loadChildren: () => import('./modules/heroes/hero.module').then((m) => m.HeroesModule),
+    loadChildren: () =>
+      import('./modules/hero/components/hero.module').then(
+        (m) => m.HeroesModule
+      ),
   },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];

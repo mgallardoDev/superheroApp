@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { HeroState, InitialHeroState } from './hero-state';
 import { environment } from 'src/environments/environment';
 import { Hero } from 'src/app/common/models/hero';
@@ -21,6 +21,12 @@ export class HeroService {
       heroList: heroes,
     });
   }
+  private setTotalHeroes(totalHeroes: number): void {
+    this.stateSubject$.next({
+      ...this.stateSubject$.getValue(),
+      totalHeroes,
+    });
+  }
 
   private setHeroToEdit(hero: Hero): void {
     this.stateSubject$.next({
@@ -28,20 +34,15 @@ export class HeroService {
       heroToEdit: hero,
     });
   }
-  getHeroes(page = 1, limit = 10) {
-    const params = new HttpParams()
-      .set('_page', page.toString())
-      .set('_limit', limit.toString());
+
+
+  getHero(id: string) {
     this.http
-      .get<Hero[]>(`${this.baseUrl}/heroes`, { params })
-      .subscribe((heroes) => this.setHeroList(heroes));
+      .get<Hero>(`${this.baseUrl}/heroes/${id}`)
+      .subscribe(hero => this.setHeroToEdit(hero));
   }
 
-  getHero(id: number): Observable<Hero> {
-    return this.http.get<Hero>(`${this.baseUrl}/heroes/${id}`);
-  }
-
-  deleteHero(id: number): Observable<void> {
+  deleteHero(id: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/heroes/${id}`);
   }
 
@@ -49,13 +50,18 @@ export class HeroService {
     return this.http.put<Hero>(`${this.baseUrl}/heroes/${hero.id}`, hero);
   }
 
-  searchHeroes(query: string, page = 1, limit = 10) {
+  searchHeroes(query: string = '', page = 1, limit = 10) {
     const params = new HttpParams()
       .set('q', query)
       .set('_page', page.toString())
       .set('_limit', limit.toString());
     this.http
-      .get<Hero[]>(`${this.baseUrl}/heroes`, { params })
-      .subscribe((heroes) => this.setHeroList(heroes));
+      .get<Hero[]>(`${this.baseUrl}/heroes`, { params, observe: 'response' })
+      .subscribe((response) => {
+        const heroes = response.body!;
+        const totalCount = +response.headers.get('X-Total-Count')!;
+        this.setHeroList(heroes);
+        this.setTotalHeroes(totalCount);
+      });
   }
 }

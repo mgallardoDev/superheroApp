@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from 'src/app/common/models/hero';
-import { Observable } from 'rxjs';
+import { Observable, Subscriber, Subscription } from 'rxjs';
 import { HeroService } from '../services/hero.service';
 
 @Component({
@@ -10,10 +10,13 @@ import { HeroService } from '../services/hero.service';
 })
 export class HeroComponent implements OnInit {
   heroState$ = this.heroService.state$;
+  binds = new Subscription()
 
   constructor(private heroService: HeroService) {}
 
   ngOnInit(): void {
-    this.heroService.getHeroes();
+    this.heroService.searchHeroes();
   }
+
+
 }

@@ -1,0 +1,50 @@
+<section class="center-container" *ngIf="heroState$ | async as state">
+
+  <div class="table-container">
+<div class="table-top">
+  <div >
+        <mat-form-field class="filter">
+          <mat-label>Filtrar héroes</mat-label>
+          <input matInput (keyup)="searchTerm$.next($event)" />
+        </mat-form-field>
+  </div>
+  <div >
+        <button mat-raised-button (click)="navigateToView('create')">Crear Héroe</button>
+          <button mat-raised-button (click)="navigateToView('edit')">Editar Héroe</button>
+  </div>
+</div>
+    <mat-table
+    [dataSource]="state.heroList"
+    class="list-container mat-elevation-z8"
+    >
+
+      <ng-container matColumnDef="alias">
+        <mat-header-cell *matHeaderCellDef> SuperNombre </mat-header-cell>
+        <mat-cell *matCellDef="let hero"> {{ hero.alias }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Nombre Real </mat-header-cell>
+        <mat-cell *matCellDef="let hero"> {{ hero.name }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="birthdate">
+        <mat-header-cell *matHeaderCellDef> Fecha nacimiento </mat-header-cell>
+        <mat-cell *matCellDef="let hero"> {{ hero.birthdate }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="publishin">
+        <mat-header-cell *matHeaderCellDef> Editorial </mat-header-cell>
+        <mat-cell *matCellDef="let hero"> {{ hero.publishin }} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns" (click)="selectHero(row)" [class.selected]="selectedHero?.id === row.id"></mat-row>
+    </mat-table>
+    <mat-paginator
+      [length]="state.totalHeroes"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]"
+      (page)="pageChanged($event)"
+    >
+    </mat-paginator>
+  </div>
+</section>
