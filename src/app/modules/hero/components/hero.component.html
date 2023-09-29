@@ -4,5 +4,5 @@
   *ngIf="activeView === 'list'"
 ></app-list-hero>
 
-<app-create-hero *ngIf="activeView === 'create'"></app-create-hero>
-<app-edit-hero *ngIf="activeView === 'edit'"></app-edit-hero>
+<app-create-hero (changeToView)="setView($event)" *ngIf="activeView === 'create'"></app-create-hero>
+<app-edit-hero (changeToView)="setView($event)" *ngIf="activeView === 'edit'"></app-edit-hero>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, of, tap } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
 import { HeroState, InitialHeroState } from './hero-state';
 import { environment } from 'src/environments/environment';
 import { Hero } from 'src/app/common/models/hero';
@@ -35,19 +36,31 @@ export class HeroService {
     });
   }
 
-
   getHero(id: string) {
     this.http
       .get<Hero>(`${this.baseUrl}/heroes/${id}`)
-      .subscribe(hero => this.setHeroToEdit(hero));
+      .subscribe((hero) => this.setHeroToEdit(hero));
   }
 
-  deleteHero(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/heroes/${id}`);
+  createHero(hero: Hero): Observable<Hero> {
+    const heroWithUUID = {
+      ...hero,
+      id: uuidv4(),
+    };
+    return this.http.post<Hero>(`${this.baseUrl}/heroes`, heroWithUUID);
   }
 
   updateHero(hero: Hero): Observable<Hero> {
     return this.http.put<Hero>(`${this.baseUrl}/heroes/${hero.id}`, hero);
+  }
+  deleteHero(id: string): Observable<void> {
+    console.log(id);
+    return this.http.delete<void>(`${this.baseUrl}/heroes/${id}`).pipe(
+      catchError((err) => {
+        console.log(err);
+        return new Observable<void>();
+      })
+    );
   }
 
   searchHeroes(query: string = '', page = 1, limit = 10) {

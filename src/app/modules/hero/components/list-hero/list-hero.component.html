@@ -11,6 +11,7 @@
   <div >
         <button mat-raised-button (click)="navigateToView('create')">Crear Héroe</button>
           <button [disabled]="!selectedHero" mat-raised-button (click)="navigateToView('edit')">Editar Héroe</button>
+          <button [disabled]="!selectedHero" mat-raised-button (click)="openConfirmationDialog()">Eliminar Héroe</button>
   </div>
 </div>
     <mat-table

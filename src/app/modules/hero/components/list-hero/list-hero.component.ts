@@ -11,6 +11,7 @@ import {
   Observable,
   Subject,
   Subscription,
+  catchError,
   map,
   of,
   switchMap,
@@ -20,6 +21,9 @@ import {
 import { Hero } from 'src/app/common/models/hero';
 import { HeroState, InitialHeroState } from '../../services/hero-state';
 import { HeroService } from '../../services/hero.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from 'src/app/common/components/confirmation-dialog/confirmation-dialog.component';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-list-hero',
@@ -37,7 +41,11 @@ export class ListHeroComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['alias', 'name', 'publishin'];
   private queryParameter: string = '';
 
-  constructor(private heroService: HeroService) {}
+  constructor(
+    private heroService: HeroService,
+    private dialog: MatDialog,
+    private notifierService: NotifierService
+  ) {}
 
   ngOnInit(): void {
     this.binds.add(
@@ -57,6 +65,28 @@ export class ListHeroComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.binds.unsubscribe;
+  }
+
+  openConfirmationDialog(): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.heroService.deleteHero(this.selectedHero!.id).pipe(
+          tap(()=> this.heroService.searchHeroes()),
+          catchError(() => {
+            this.notifierService.show({
+              message: 'No se ha podido eliminar el héroe',
+              type: 'error',
+            });
+            return of(null);
+          })
+        ).subscribe(()=>this.notifierService.show({
+          message: 'Héroe eliminado con éxito',
+          type: 'success',
+        }));
+      }
+    });
   }
 
   selectHero(hero: Hero) {

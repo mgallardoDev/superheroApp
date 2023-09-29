@@ -1,1 +1,37 @@
-<p>create-hero works!</p>
+<mat-card>
+  <mat-card-title>Crear Héroe</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="createHeroForm">
+      <div class="form-container">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>SuperNombre</mat-label>
+          <input matInput formControlName="alias" />
+          <mat-error *ngIf="createHeroForm.get('alias')?.hasError('required')">
+            El SuperNombre es obligatorio.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nombre Real</mat-label>
+          <input matInput formControlName="name" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Editorial</mat-label>
+          <input matInput formControlName="publishin" />
+          <mat-error *ngIf="createHeroForm.get('publishin')?.hasError('required')">
+            La editorial es obligatoria.
+          </mat-error>
+        </mat-form-field>
+      </div >
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="onCreateHero()">
+      Crear Héroe
+    </button>
+    <button mat-raised-button color="primary" (click)="onCancel()">
+      Cancelar
+    </button>
+  </mat-card-actions>
+</mat-card>
