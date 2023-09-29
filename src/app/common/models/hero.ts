@@ -4,3 +4,9 @@ export interface Hero {
   name?: string;
   publishin: string;
 }
+
+export interface CreateHeroDto {
+  alias: string;
+  name?: string;
+  publishin: string;
+}

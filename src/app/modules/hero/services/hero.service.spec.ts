@@ -21,27 +21,88 @@ describe('HeroService', () => {
 
   afterEach(() => {
     httpMock.verify();
+  });
 
-    it('debería recuperar héroes y actualizar el estado', () => {
-      const dummyHeroes = [
-        { id: '1', name: 'Batman', alias: 'Bruce Wayne' },
-        { id: '2', name: 'Superman', alias: 'Clark Kent' }
-      ];
-    
-      service.searchHeroes('Bat', 1, 2);
-    
-      const req = httpMock.expectOne(`${service.baseApiUrl}/heroes?alias_like=Bat&_page=1&_limit=2`);
-      expect(req.request.method).toBe('GET');
-      req.flush(dummyHeroes, { headers: { 'X-Total-Count': '2' } });
-    
-      service.state$.subscribe(state => {
-        expect(state.heroList.length).toBe(2);
-        expect(state.totalHeroes).toBe(2);
-      });
+  it('should retrieve heroes and update the state', () => {
+    const dummyHeroes = [
+      {
+        id: '1',
+        name: 'Batman',
+        alias: 'Bruce Wayne',
+        publishin: 'D.C. Comics',
+      },
+      {
+        id: '2',
+        name: 'Superman',
+        alias: 'Clark Kent',
+        publishin: 'D.C. Comics',
+      },
+    ];
+
+    service.searchHeroes('Bat', 1, 2);
+
+    const req = httpMock.expectOne(
+      `${service.baseApiUrl}/heroes?alias_like=Bat&_page=1&_limit=2`
+    );
+    expect(req.request.method).toBe('GET');
+    req.flush(dummyHeroes, { headers: { 'X-Total-Count': '2' } });
+
+    service.state$.subscribe((state) => {
+      expect(state.heroList.length).toBe(2);
+      expect(state.totalHeroes).toBe(2);
+    });
+  });
+
+  it('should fetch a hero by its ID and update the state', () => {
+    const dummyHero = {
+      id: '1',
+      name: 'Batman',
+      alias: 'Bruce Wayne',
+      publishin: 'D.C. Comics',
+    };
+
+    service.getHero('1');
+
+    const req = httpMock.expectOne(`${service.baseApiUrl}/heroes/1`);
+    expect(req.request.method).toBe('GET');
+    req.flush(dummyHero);
+
+    service.state$.subscribe((state) => {
+      expect(state.heroToEdit).toEqual(dummyHero);
+    });
+  });
+
+  it('should create a new hero', () => {
+    const heroData = { name: 'Spider-Man', alias: 'Peter Parker', publishin: 'D.C. Comics' };
+
+    service.createHero(heroData).subscribe(hero => {
+      expect(hero.id).toBeDefined(); // UUID should be assigned
+      expect(hero.name).toBe(heroData.name);
+      expect(hero.alias).toBe(heroData.alias);
     });
 
+    const req = httpMock.expectOne(`${service.baseApiUrl}/heroes`);
+    expect(req.request.method).toBe('POST');
+    req.flush({ ...heroData, id: 'some-uuid' });
+  });
 
+  it('should update an existing hero', () => {
+    const updatedHero = { id: '1', name: 'Iron Man', alias: 'Tony Stark', publishin: 'D.C. Comics' };
 
+    service.updateHero(updatedHero).subscribe(hero => {
+      expect(hero).toEqual(updatedHero);
+    });
 
+    const req = httpMock.expectOne(`${service.baseApiUrl}/heroes/1`);
+    expect(req.request.method).toBe('PUT');
+    req.flush(updatedHero);
+  });
+
+  it('should delete a hero by its ID', () => {
+    service.deleteHero('1').subscribe();
+
+    const req = httpMock.expectOne(`${service.baseApiUrl}/heroes/1`);
+    expect(req.request.method).toBe('DELETE');
+    req.flush({});
   });
 });

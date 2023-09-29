@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, catchError, of, tap } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 import { HeroState, InitialHeroState } from './hero-state';
 import { environment } from 'src/environments/environment';
-import { Hero } from 'src/app/common/models/hero';
+import { CreateHeroDto, Hero } from 'src/app/common/models/hero';
 
 @Injectable({
   providedIn: 'root',
@@ -47,7 +47,7 @@ export class HeroService {
       .subscribe((hero) => this.setHeroToEdit(hero));
   }
 
-  createHero(hero: Hero): Observable<Hero> {
+  createHero(hero: CreateHeroDto): Observable<Hero> {
     const heroWithUUID = {
       ...hero,
       id: uuidv4(),
