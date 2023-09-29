@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable, catchError, of, tap } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
-import { HeroState, InitialHeroState } from './hero-state';
+import { HeroState, InitialHeroState } from './hero-state-config';
 import { environment } from 'src/environments/environment';
 import { CreateHeroDto, Hero } from 'src/app/common/models/hero';
 

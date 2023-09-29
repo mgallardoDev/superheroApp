@@ -20,7 +20,7 @@ export class HeroComponent implements OnInit {
     this.heroService.searchHeroes();
   }
 
-  setView(event:{view: 'list' | 'create' | 'edit', heroId?: string}) {
+  setView(event:{view: 'list' | 'create' | 'edit', heroId?: string | null}) {
     this.heroId = event.heroId ?? null;
     this.activeView = event.view;
   }

@@ -19,7 +19,7 @@ import {
   throttleTime,
 } from 'rxjs';
 import { Hero } from 'src/app/common/models/hero';
-import { HeroState, InitialHeroState } from '../../services/hero-state';
+import { HeroState, InitialHeroState } from '../../services/hero-state-config';
 import { HeroService } from '../../services/hero.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from 'src/app/common/components/confirmation-dialog/confirmation-dialog.component';
@@ -32,13 +32,16 @@ import { NotifierService } from 'angular-notifier';
 })
 export class ListHeroComponent implements OnInit, OnDestroy {
   @Input() heroState$: Observable<HeroState> = of(InitialHeroState);
-  @Output() changeToView = new EventEmitter<{view:'list' | 'create' | 'edit', heroId:string}>();
+  @Output() changeToView = new EventEmitter<{
+    view: 'list' | 'create' | 'edit';
+    heroId: string | null;
+  }>();
   binds = new Subscription();
   selectedHero: Hero | null = null;
   searchTerm$ = new Subject<any>();
   pageSize: number = 10;
   pageIndex = 1;
-  displayedColumns: string[] = ['alias', 'name', 'publishin'];
+  displayedColumns: string[] = ['alias', 'name', 'publishing'];
   private queryParameter: string = '';
 
   constructor(
@@ -55,7 +58,6 @@ export class ListHeroComponent implements OnInit, OnDestroy {
           map((event) => event.target.value),
           tap((query) => (this.queryParameter = query)),
           switchMap((query) => {
-            console.log('esesto')              
             this.heroService.searchHeroes(query);
             return of([]);
           })
@@ -65,7 +67,7 @@ export class ListHeroComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.binds.unsubscribe;
+    this.binds.unsubscribe();
   }
 
   openConfirmationDialog(): void {
@@ -76,10 +78,13 @@ export class ListHeroComponent implements OnInit, OnDestroy {
         this.heroService
           .deleteHero(this.selectedHero!.id)
           .pipe(
-            tap(() => this.heroService.searchHeroes(
-              this.queryParameter,
-              this.pageIndex,
-              this.pageSize)),
+            tap(() =>
+              this.heroService.searchHeroes(
+                this.queryParameter,
+                this.pageIndex,
+                this.pageSize
+              )
+            ),
             catchError(() => {
               this.notifierService.show({
                 message: 'No se ha podido eliminar el héroe',
@@ -93,7 +98,6 @@ export class ListHeroComponent implements OnInit, OnDestroy {
               message: 'Héroe eliminado con éxito',
               type: 'success',
             });
-          
           });
       }
     });
@@ -114,6 +118,9 @@ export class ListHeroComponent implements OnInit, OnDestroy {
   }
 
   navigateToView(view: 'list' | 'create' | 'edit') {
-    this.changeToView.emit({view, heroId: this.selectedHero!.id }  );
+    this.changeToView.emit({
+      view,
+      heroId: view === 'list' ? this.selectedHero!.id : null,
+    });
   }
 }

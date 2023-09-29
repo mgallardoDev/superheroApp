@@ -34,7 +34,7 @@ export class EditHeroComponent implements OnInit, OnDestroy, AfterViewInit {
     this.editHeroForm = this.formBuilder.group({
       name: [''],
       alias: ['', [Validators.required]],
-      publishin: ['', [Validators.required]],
+      publishing: ['', [Validators.required]],
     });
   }
   ngOnInit(): void {
@@ -44,7 +44,7 @@ export class EditHeroComponent implements OnInit, OnDestroy, AfterViewInit {
           this.editHeroForm.patchValue({
             name: state.heroToEdit.name,
             alias: state.heroToEdit.alias,
-            publishin: state.heroToEdit.publishin,
+            publishing: state.heroToEdit.publishing,
           });
           this.hero = state.heroToEdit;
         }
@@ -79,12 +79,11 @@ export class EditHeroComponent implements OnInit, OnDestroy, AfterViewInit {
         .subscribe(() => {
           this.notifierService.show({
             message: 'Héroe actualizado con éxito',
-            type: 'succes',
+            type: 'success',
           });
           this.navigateToView('list');
         });
     }
-    console.log(this.editHeroForm);
   }
   onCancel() {
     this.navigateToView('list');

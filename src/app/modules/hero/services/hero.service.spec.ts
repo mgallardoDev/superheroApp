@@ -29,13 +29,13 @@ describe('HeroService', () => {
         id: '1',
         name: 'Batman',
         alias: 'Bruce Wayne',
-        publishin: 'D.C. Comics',
+        publishing: 'D.C. Comics',
       },
       {
         id: '2',
         name: 'Superman',
         alias: 'Clark Kent',
-        publishin: 'D.C. Comics',
+        publishing: 'D.C. Comics',
       },
     ];
 
@@ -48,7 +48,7 @@ describe('HeroService', () => {
     req.flush(dummyHeroes, { headers: { 'X-Total-Count': '2' } });
 
     service.state$.subscribe((state) => {
-      expect(state.heroList.length).toBe(2);
+      expect(state.heroList).toBe(dummyHeroes);
       expect(state.totalHeroes).toBe(2);
     });
   });
@@ -58,7 +58,7 @@ describe('HeroService', () => {
       id: '1',
       name: 'Batman',
       alias: 'Bruce Wayne',
-      publishin: 'D.C. Comics',
+      publishing: 'D.C. Comics',
     };
 
     service.getHero('1');
@@ -73,9 +73,13 @@ describe('HeroService', () => {
   });
 
   it('should create a new hero', () => {
-    const heroData = { name: 'Spider-Man', alias: 'Peter Parker', publishin: 'D.C. Comics' };
+    const heroData = {
+      name: 'Spider-Man',
+      alias: 'Peter Parker',
+      publishing: 'D.C. Comics',
+    };
 
-    service.createHero(heroData).subscribe(hero => {
+    service.createHero(heroData).subscribe((hero) => {
       expect(hero.id).toBeDefined(); // UUID should be assigned
       expect(hero.name).toBe(heroData.name);
       expect(hero.alias).toBe(heroData.alias);
@@ -87,9 +91,14 @@ describe('HeroService', () => {
   });
 
   it('should update an existing hero', () => {
-    const updatedHero = { id: '1', name: 'Iron Man', alias: 'Tony Stark', publishin: 'D.C. Comics' };
+    const updatedHero = {
+      id: '1',
+      name: 'Iron Man',
+      alias: 'Tony Stark',
+      publishing: 'D.C. Comics',
+    };
 
-    service.updateHero(updatedHero).subscribe(hero => {
+    service.updateHero(updatedHero).subscribe((hero) => {
       expect(hero).toEqual(updatedHero);
     });
 

@@ -5,7 +5,7 @@
       <div class="form-container">
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>SuperNombre</mat-label>
-          <input matInput formControlName="alias" appCapitalizeWords/>
+          <input matInput formControlName="alias" appCapitalizeWords />
           <mat-error *ngIf="editHeroForm.get('alias')?.hasError('required')">
             El SuperNombre es obligatorio.
           </mat-error>
@@ -13,17 +13,19 @@
 
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Nombre Real</mat-label>
-          <input matInput formControlName="name" appCapitalizeWords/>
+          <input matInput formControlName="name" appCapitalizeWords />
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Editorial</mat-label>
-          <input matInput formControlName="publishin" />
-          <mat-error *ngIf="editHeroForm.get('publishin')?.hasError('required')">
+          <input matInput formControlName="publishing" />
+          <mat-error
+            *ngIf="editHeroForm.get('publishing')?.hasError('required')"
+          >
             La editorial es obligatoria.
           </mat-error>
         </mat-form-field>
-      </div >
+      </div>
     </form>
   </mat-card-content>
   <mat-card-actions>

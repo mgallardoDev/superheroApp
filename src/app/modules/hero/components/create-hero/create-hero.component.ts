@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription, catchError, of, tap } from 'rxjs';
 import { HeroService } from '../../services/hero.service';
@@ -11,7 +17,9 @@ import { NotifierService } from 'angular-notifier';
   styleUrls: ['./create-hero.component.css'],
 })
 export class CreateHeroComponent implements OnInit, OnDestroy {
-  @Output() changeToView = new EventEmitter<{view:'list' | 'create' | 'edit'}>();
+  @Output() changeToView = new EventEmitter<{
+    view: 'list' | 'create' | 'edit';
+  }>();
   binds = new Subscription();
   createHeroForm: FormGroup;
 
@@ -23,11 +31,11 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
     this.createHeroForm = this.formBuilder.group({
       name: [''],
       alias: ['', [Validators.required]],
-      publishin: ['', [Validators.required]],
+      publishing: ['', [Validators.required]],
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.binds.unsubscribe();
@@ -37,22 +45,27 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
     if (this.createHeroForm.valid) {
       const newHero: Hero = this.createHeroForm.value;
 
-
-      this.heroService.createHero(newHero).pipe(
-        tap(() => this.heroService.searchHeroes()),
-        catchError(() => {
+      this.heroService
+        .createHero(newHero)
+        .pipe(
+          tap(() => this.heroService.searchHeroes()),
+          catchError(() => {
+            this.notifierService.show({
+              message: 'No se ha podido crear el héroe',
+              type: 'error',
+            });
+            return of(null);
+          })
+        )
+        .subscribe(() => {
           this.notifierService.show({
-            message: 'No se ha podido crear el héroe',
-            type: 'error',
+            type: 'success',
+            message: 'Héroe creado con éxito',
           });
-          return of(null);
-        }),
-      )
-      .subscribe(() => {
-        this.notifierService.notify('success', 'Héroe creado con éxito');
-        this.navigateToView('list');
-      });
+          this.navigateToView('list');
+        });
     }
+    this.createHeroForm.markAllAsTouched()
   }
 
   onCancel() {
@@ -60,6 +73,6 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
   }
 
   navigateToView(view: 'list' | 'create' | 'edit') {
-    this.changeToView.emit({view});
+    this.changeToView.emit({ view });
   }
 }
