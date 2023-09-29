@@ -36,6 +36,11 @@ export class HeroService {
     });
   }
 
+  //necesario para las pruebas unitarias sin tener que hacerla public
+  get baseApiUrl() {
+    return this.baseUrl;
+  }
+
   getHero(id: string) {
     this.http
       .get<Hero>(`${this.baseUrl}/heroes/${id}`)
