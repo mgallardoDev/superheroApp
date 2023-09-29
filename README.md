@@ -5,6 +5,8 @@
 
 Gestión de un litado de héroes (que estamos faltos de ellos)
 
+con npm run start:dev, lanzamos tante el mock server como la aplicacion
+
 ## Uso de Interfaces en lugar de Clases
 
 Para el modelo de datos, hemos optado por usar interfaces en lugar de clases. Esto es debido a que los héroes no necesitan lógica propia. Las interfaces en TypeScript nos proporcionan una forma efectiva de definir la forma de los objetos, garantizando que se cumplan ciertos contratos sin tener que implementar la lógica de una clase.
@@ -29,5 +31,11 @@ Hemos creado una directiva que se puede aplicar a los inputs de texto según lo 
 
 Se ha hecho un uso exhaustivo de la programación reactiva utilizando RxJS. Hemos aplicado este paradigma en prácticamente todas las partes de la aplicación que lo permitían, maximizando los beneficios de trabajar con flujos de datos asíncronos y reactivos.
 
+## Docker
 
-Desarrollado por Marco Antonio Gallardo.
+Usaremos 'docker-compose up --build' para levantar el proyecto y tendremos accesible el front en http://locahost:8081 y el back en http://locahost:3000
+
+
+Desarrollado por Marco Antonio Gallardo. 
+
+mgallardodev@gmail.com
