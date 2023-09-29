@@ -1,27 +1,33 @@
 # Superheroes
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.9.
 
-## Development server
+## Funcionamiento General
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Gestión de un litado de héroes (que estamos faltos de ellos)
 
-## Code scaffolding
+## Uso de Interfaces en lugar de Clases
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Para el modelo de datos, hemos optado por usar interfaces en lugar de clases. Esto es debido a que los héroes no necesitan lógica propia. Las interfaces en TypeScript nos proporcionan una forma efectiva de definir la forma de los objetos, garantizando que se cumplan ciertos contratos sin tener que implementar la lógica de una clase.
 
-## Build
+## Mock Server
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+La aplicación utiliza un mock server para simular llamadas a una API real. Esto nos ha permitido desarrollar y probar la aplicación sin depender de un back-end real.
 
-## Running unit tests
+## Gestión del Estado
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Hemos implementado una pequeña gestión de estado en los servicios. Se decidió no utilizar soluciones más complejas como NgRx porque no era necesario para la naturaleza y el alcance de esta aplicación.
 
-## Running end-to-end tests
+## Interceptor de Carga
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Se ha implementado un interceptor que muestra un spinner de carga cada vez que hay una petición en curso. Esto mejora la experiencia del usuario al proporcionar un feedback visual mientras se espera la respuesta del servidor.
 
-## Further help
+## Directiva para Capitalizar Texto
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Hemos creado una directiva que se puede aplicar a los inputs de texto según lo requieran. Esta directiva se encarga de transformar el texto ingresado para que la primera letra de cada palabra esté en mayúsculas.
+
+## Programación Reactiva
+
+Se ha hecho un uso exhaustivo de la programación reactiva utilizando RxJS. Hemos aplicado este paradigma en prácticamente todas las partes de la aplicación que lo permitían, maximizando los beneficios de trabajar con flujos de datos asíncronos y reactivos.
+
+
+Desarrollado por Marco Antonio Gallardo.
