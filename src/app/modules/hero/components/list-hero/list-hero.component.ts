@@ -32,7 +32,7 @@ import { NotifierService } from 'angular-notifier';
 })
 export class ListHeroComponent implements OnInit, OnDestroy {
   @Input() heroState$: Observable<HeroState> = of(InitialHeroState);
-  @Output() changeToView = new EventEmitter<'list' | 'create' | 'edit'>();
+  @Output() changeToView = new EventEmitter<{view:'list' | 'create' | 'edit', heroId:string}>();
   binds = new Subscription();
   selectedHero: Hero | null = null;
   searchTerm$ = new Subject<any>();
@@ -55,6 +55,7 @@ export class ListHeroComponent implements OnInit, OnDestroy {
           map((event) => event.target.value),
           tap((query) => (this.queryParameter = query)),
           switchMap((query) => {
+            console.log('esesto')              
             this.heroService.searchHeroes(query);
             return of([]);
           })
@@ -72,25 +73,33 @@ export class ListHeroComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.heroService.deleteHero(this.selectedHero!.id).pipe(
-          tap(()=> this.heroService.searchHeroes()),
-          catchError(() => {
+        this.heroService
+          .deleteHero(this.selectedHero!.id)
+          .pipe(
+            tap(() => this.heroService.searchHeroes(
+              this.queryParameter,
+              this.pageIndex,
+              this.pageSize)),
+            catchError(() => {
+              this.notifierService.show({
+                message: 'No se ha podido eliminar el héroe',
+                type: 'error',
+              });
+              return of(null);
+            })
+          )
+          .subscribe(() => {
             this.notifierService.show({
-              message: 'No se ha podido eliminar el héroe',
-              type: 'error',
+              message: 'Héroe eliminado con éxito',
+              type: 'success',
             });
-            return of(null);
-          })
-        ).subscribe(()=>this.notifierService.show({
-          message: 'Héroe eliminado con éxito',
-          type: 'success',
-        }));
+          
+          });
       }
     });
   }
 
   selectHero(hero: Hero) {
-    this.heroService.getHero(hero.id);
     this.selectedHero = hero;
   }
 
@@ -105,6 +114,6 @@ export class ListHeroComponent implements OnInit, OnDestroy {
   }
 
   navigateToView(view: 'list' | 'create' | 'edit') {
-    this.changeToView.emit(view);
+    this.changeToView.emit({view, heroId: this.selectedHero!.id }  );
   }
 }

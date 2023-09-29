@@ -1,7 +1,9 @@
 import {
   Component,
   EventEmitter,
+  Input,
   OnDestroy,
+  AfterViewInit,
   OnInit,
   Output,
 } from '@angular/core';
@@ -16,8 +18,11 @@ import { NotifierService } from 'angular-notifier';
   templateUrl: './edit-hero.component.html',
   styleUrls: ['./edit-hero.component.css'],
 })
-export class EditHeroComponent implements OnInit, OnDestroy {
-  @Output() changeToView = new EventEmitter<'list' | 'create' | 'edit'>();
+export class EditHeroComponent implements OnInit, OnDestroy, AfterViewInit {
+  @Input() heroId!: string;
+  @Output() changeToView = new EventEmitter<{
+    view: 'list' | 'create' | 'edit';
+  }>();
   binds = new Subscription();
   editHeroForm: FormGroup;
   hero: Hero | null = null;
@@ -45,6 +50,9 @@ export class EditHeroComponent implements OnInit, OnDestroy {
         }
       })
     );
+  }
+  ngAfterViewInit(): void {
+    this.heroService.getHero(this.heroId);
   }
   ngOnDestroy(): void {
     this.binds.unsubscribe();
@@ -82,6 +90,6 @@ export class EditHeroComponent implements OnInit, OnDestroy {
     this.navigateToView('list');
   }
   navigateToView(view: 'list' | 'create' | 'edit') {
-    this.changeToView.emit(view);
+    this.changeToView.emit({ view });
   }
 }

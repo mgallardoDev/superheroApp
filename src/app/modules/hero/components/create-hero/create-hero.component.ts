@@ -11,7 +11,7 @@ import { NotifierService } from 'angular-notifier';
   styleUrls: ['./create-hero.component.css'],
 })
 export class CreateHeroComponent implements OnInit, OnDestroy {
-  @Output() changeToView = new EventEmitter<'list' | 'create' | 'edit'>();
+  @Output() changeToView = new EventEmitter<{view:'list' | 'create' | 'edit'}>();
   binds = new Subscription();
   createHeroForm: FormGroup;
 
@@ -49,10 +49,7 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
         }),
       )
       .subscribe(() => {
-        this.notifierService.show({
-          message: 'Héroe creado con éxito',
-          type: 'success',
-        });
+        this.notifierService.notify('success', 'Héroe creado con éxito');
         this.navigateToView('list');
       });
     }
@@ -63,6 +60,6 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
   }
 
   navigateToView(view: 'list' | 'create' | 'edit') {
-    this.changeToView.emit(view);
+    this.changeToView.emit({view});
   }
 }

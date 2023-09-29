@@ -11,6 +11,7 @@ import { HeroService } from '../services/hero.service';
 export class HeroComponent implements OnInit {
   activeView: 'list' | 'create' | 'edit' = 'list';
   heroState$ = this.heroService.state$;
+  heroId: string | null = null
   binds = new Subscription();
 
   constructor(private heroService: HeroService) {}
@@ -19,7 +20,8 @@ export class HeroComponent implements OnInit {
     this.heroService.searchHeroes();
   }
 
-  setView(view: 'list' | 'create' | 'edit') {
-    this.activeView = view;
+  setView(event:{view: 'list' | 'create' | 'edit', heroId?: string}) {
+    this.heroId = event.heroId ?? null;
+    this.activeView = event.view;
   }
 }

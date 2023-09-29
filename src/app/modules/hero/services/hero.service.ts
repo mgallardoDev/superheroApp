@@ -65,7 +65,7 @@ export class HeroService {
 
   searchHeroes(query: string = '', page = 1, limit = 10) {
     const params = new HttpParams()
-      .set('q', query)
+      .set('alias_like', query)
       .set('_page', page.toString())
       .set('_limit', limit.toString());
     this.http

@@ -5,7 +5,7 @@
       <div class="form-container">
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>SuperNombre</mat-label>
-          <input matInput formControlName="alias" />
+          <input matInput formControlName="alias" appCapitalizeWords/>
           <mat-error *ngIf="editHeroForm.get('alias')?.hasError('required')">
             El SuperNombre es obligatorio.
           </mat-error>
@@ -13,7 +13,7 @@
 
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Nombre Real</mat-label>
-          <input matInput formControlName="name" />
+          <input matInput formControlName="name" appCapitalizeWords/>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width">

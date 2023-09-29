@@ -1,4 +1,7 @@
 <app-header></app-header>
-<router-outlet></router-outlet>
+<app-loading *ngIf="isLoading$ | async"></app-loading>
+<div [hidden]="isLoading$ | async">
+    <router-outlet></router-outlet>
+    <notifier-container class="position-absolute"></notifier-container>
+</div>
 <app-footer></app-footer>
-<notifier-container></notifier-container>
