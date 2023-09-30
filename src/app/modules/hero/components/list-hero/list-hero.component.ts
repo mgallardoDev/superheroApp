@@ -120,7 +120,7 @@ export class ListHeroComponent implements OnInit, OnDestroy {
   navigateToView(view: 'list' | 'create' | 'edit') {
     this.changeToView.emit({
       view,
-      heroId: view === 'list' ? this.selectedHero!.id : null,
+      heroId: view === 'edit' ? this.selectedHero!.id : null,
     });
   }
 }

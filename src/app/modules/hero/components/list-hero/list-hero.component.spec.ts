@@ -15,7 +15,7 @@ describe('ListHeroComponent', () => {
   let mockDialog: jasmine.SpyObj<MatDialog>;
   let mockNotifierService: jasmine.SpyObj<NotifierService>;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     mockHeroService = jasmine.createSpyObj('HeroService', [
       'searchHeroes',
       'deleteHero',
@@ -23,7 +23,7 @@ describe('ListHeroComponent', () => {
     mockDialog = jasmine.createSpyObj('MatDialog', ['open']);
     mockNotifierService = jasmine.createSpyObj('NotifierService', ['show']);
 
-    TestBed.configureTestingModule({
+    await TestBed.configureTestingModule({
       declarations: [ListHeroComponent],
       imports: [SharedModule, NoopAnimationsModule],
       providers: [

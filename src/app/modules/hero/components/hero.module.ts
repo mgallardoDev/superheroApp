@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeroRoutingModule } from '../hero-routing.module';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/common/shared.module';
-import { HeroComponent } from './hero.component';
+import { HeroRoutingModule } from '../hero-routing.module';
 import { CreateHeroComponent } from './create-hero/create-hero.component';
-import { ListHeroComponent } from './list-hero/list-hero.component';
 import { EditHeroComponent } from './edit-hero/edit-hero.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HeroComponent } from './hero.component';
+import { ListHeroComponent } from './list-hero/list-hero.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     HeroRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
   ],
 })
 export class HeroesModule {}

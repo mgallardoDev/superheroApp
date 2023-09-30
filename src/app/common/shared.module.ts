@@ -11,6 +11,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { CapitalizeWordsDirective } from './directives/capitalizate-input.directive';
 import { LoadingComponent } from './components/loading/loading.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [ConfirmationDialogComponent, CapitalizeWordsDirective, LoadingComponent],
   imports: [CommonModule, MatDialogModule, MatButtonModule, MatCardModule,MatProgressSpinnerModule],
@@ -23,7 +24,8 @@ import { LoadingComponent } from './components/loading/loading.component';
     MatCheckboxModule,
     MatDialogModule,
     CapitalizeWordsDirective,
-    LoadingComponent
+    LoadingComponent,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule {}

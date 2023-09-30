@@ -47,6 +47,11 @@ export class EditHeroComponent implements OnInit, OnDestroy, AfterViewInit {
             publishing: state.heroToEdit.publishing,
           });
           this.hero = state.heroToEdit;
+        } else {
+          this.notifierService.show({
+            type: 'error',
+            message: 'No se ha encontrado el heroe a editar',
+          });
         }
       })
     );
@@ -61,7 +66,7 @@ export class EditHeroComponent implements OnInit, OnDestroy, AfterViewInit {
   onSaveChanges() {
     if (this.editHeroForm.valid) {
       const updatedHero: Hero = {
-        id: this.hero?.id,
+        id: this.hero!.id,
         ...this.editHeroForm.value,
       };
       this.heroService

@@ -29,7 +29,7 @@ export class HeroService {
     });
   }
 
-  private setHeroToEdit(hero: Hero): void {
+  private setHeroToEdit(hero: Hero | null): void {
     this.stateSubject$.next({
       ...this.stateSubject$.getValue(),
       heroToEdit: hero,
@@ -44,6 +44,9 @@ export class HeroService {
   getHero(id: string) {
     this.http
       .get<Hero>(`${this.baseUrl}/heroes/${id}`)
+      .pipe(
+        catchError(()=> of(null))
+        )
       .subscribe((hero) => this.setHeroToEdit(hero));
   }
 
