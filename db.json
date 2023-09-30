@@ -88,6 +88,12 @@
       "alias": "Invincible",
       "name": "Mark Grayson",
       "publishing": "Image Comics"
+    },
+    {
+      "name": "Sdf",
+      "alias": "Asdf",
+      "publishing": "sadf",
+      "id": "cd905566-984d-4a82-b504-5f90a5743095"
     }
   ]
 }

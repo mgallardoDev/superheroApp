@@ -25,12 +25,12 @@ describe('EditHeroComponent', () => {
     mockHeroService = jasmine.createSpyObj('HeroService', [
       'updateHero',
       'getHero',
-      'searchHeroes'
+      'searchHeroes',
     ]);
     mockHeroService.state$ = of({
-      heroList: [],
-      heroToEdit: null,
-      totalHeroes: 0,
+      heroList: [mockHero],
+      heroToEdit: mockHero,
+      totalHeroes: 1,
     });
 
     mockNotifierService = jasmine.createSpyObj(['show']);
@@ -67,22 +67,7 @@ describe('EditHeroComponent', () => {
   });
 
   it('should show error notification when hero update fails', () => {
-
-    //EN ESTE CASO TENEMOS QUE VOLVER A CREAR EL COMPONENTE YA QUE LOS VALORES DEL STATE QUE USAMOS POR DEFECTO EN BEFOREEACH NO NOS SIREVEN
-
-
-    mockHeroService.state$ = of({
-      heroList: [mockHero],
-      heroToEdit: mockHero,
-      totalHeroes: 1,
-    });
     mockHeroService.updateHero.and.returnValue(throwError(new Error()));
-
-    fixture = TestBed.createComponent(EditHeroComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-
-
     component.onSaveChanges();
 
     expect(mockNotifierService.show).toHaveBeenCalledWith({
@@ -92,30 +77,13 @@ describe('EditHeroComponent', () => {
   });
 
   it('should show error notification when hero update fails', () => {
-
-    //EN ESTE CASO TENEMOS QUE VOLVER A CREAR EL COMPONENTE YA QUE LOS VALORES DEL STATE QUE USAMOS POR DEFECTO EN BEFOREEACH NO NOS SIREVEN
-
-
-    mockHeroService.state$ = of({
-      heroList: [mockHero],
-      heroToEdit: mockHero,
-      totalHeroes: 1,
-    });
     mockHeroService.updateHero.and.returnValue(of(mockHero));
-
-    fixture = TestBed.createComponent(EditHeroComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-
-
     component.onSaveChanges();
-
     expect(mockNotifierService.show).toHaveBeenCalledWith({
       message: 'Héroe actualizado con éxito',
       type: 'success',
     });
   });
-
 
   it('should unsubscribe from binds on destroy', () => {
     const spy = spyOn(component.binds, 'unsubscribe');
