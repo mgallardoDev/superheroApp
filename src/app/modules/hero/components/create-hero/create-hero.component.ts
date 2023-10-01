@@ -10,6 +10,7 @@ import { Subscription, catchError, of, tap } from 'rxjs';
 import { HeroService } from '../../services/hero.service';
 import { Hero } from 'src/app/common/models/hero';
 import { NotifierService } from 'angular-notifier';
+import { heroForm } from '../../forms/hero.form';
 
 @Component({
   selector: 'app-create-hero',
@@ -28,11 +29,7 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
     private heroService: HeroService,
     private notifierService: NotifierService
   ) {
-    this.createHeroForm = this.formBuilder.group({
-      name: [''],
-      alias: ['', [Validators.required]],
-      publishing: ['', [Validators.required]],
-    });
+    this.createHeroForm = this.formBuilder.group(heroForm);
   }
 
   ngOnInit(): void {}
@@ -65,7 +62,7 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
           this.navigateToView('list');
         });
     }
-    this.createHeroForm.markAllAsTouched()
+    this.createHeroForm.markAllAsTouched();
   }
 
   onCancel() {

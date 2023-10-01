@@ -11,6 +11,7 @@ import { NotifierService } from 'angular-notifier';
 import { Subscription, catchError, firstValueFrom, of, tap } from 'rxjs';
 import { Hero } from 'src/app/common/models/hero';
 import { HeroService } from '../../services/hero.service';
+import { heroForm } from '../../forms/hero.form';
 
 @Component({
   selector: 'app-edit-hero',
@@ -30,11 +31,7 @@ export class EditHeroComponent implements OnInit, OnDestroy {
     private heroService: HeroService,
     private notifierService: NotifierService
   ) {
-    this.editHeroForm = this.formBuilder.group({
-      name: [''],
-      alias: ['', [Validators.required]],
-      publishing: ['', [Validators.required]],
-    });
+    this.editHeroForm = this.formBuilder.group(heroForm);
   }
   async ngOnInit(): Promise<void> {
     await firstValueFrom(this.heroService.getHero(this.heroId));
