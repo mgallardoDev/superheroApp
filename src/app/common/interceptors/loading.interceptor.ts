@@ -17,10 +17,17 @@ export class LoadingInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    this.loadingService.setLoadingState(true);
+    if (
+      (req.method === 'POST' || req.method === 'PUT') &&
+      req.url.includes('/heroes')
+    ) {
+      this.loadingService.setLoadingState(true);
 
-    return next.handle(req).pipe(
-      finalize(() => this.loadingService.setLoadingState(false))
-    );
+      return next
+        .handle(req)
+        .pipe(finalize(() => this.loadingService.setLoadingState(false)));
+    }
+
+    return next.handle(req);
   }
 }

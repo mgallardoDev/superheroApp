@@ -3,22 +3,21 @@ import {
   EventEmitter,
   Input,
   OnDestroy,
-  AfterViewInit,
   OnInit,
-  Output,
+  Output
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription, catchError, of, tap } from 'rxjs';
-import { HeroService } from '../../services/hero.service';
-import { Hero } from 'src/app/common/models/hero';
 import { NotifierService } from 'angular-notifier';
+import { Subscription, catchError, firstValueFrom, of, tap } from 'rxjs';
+import { Hero } from 'src/app/common/models/hero';
+import { HeroService } from '../../services/hero.service';
 
 @Component({
   selector: 'app-edit-hero',
   templateUrl: './edit-hero.component.html',
   styleUrls: ['./edit-hero.component.css'],
 })
-export class EditHeroComponent implements OnInit, OnDestroy, AfterViewInit {
+export class EditHeroComponent implements OnInit, OnDestroy {
   @Input() heroId!: string;
   @Output() changeToView = new EventEmitter<{
     view: 'list' | 'create' | 'edit';
@@ -37,7 +36,8 @@ export class EditHeroComponent implements OnInit, OnDestroy, AfterViewInit {
       publishing: ['', [Validators.required]],
     });
   }
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    await firstValueFrom(this.heroService.getHero(this.heroId));
     this.binds.add(
       this.heroService.state$.subscribe((state) => {
         if (state.heroToEdit) {
@@ -52,13 +52,12 @@ export class EditHeroComponent implements OnInit, OnDestroy, AfterViewInit {
             type: 'error',
             message: 'No se ha encontrado el heroe a editar',
           });
+          this.navigateToView('list');
         }
       })
     );
   }
-  ngAfterViewInit(): void {
-    this.heroService.getHero(this.heroId);
-  }
+
   ngOnDestroy(): void {
     this.binds.unsubscribe();
   }

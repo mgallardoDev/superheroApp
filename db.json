@@ -9,7 +9,7 @@
     {
       "id": "8e530c69-273f-49c4-a766-a07a5b0d6303",
       "name": "Bruce Wayne",
-      "alias": "Batmana",
+      "alias": "Batman",
       "publishing": "DC Comics"
     },
     {
@@ -90,10 +90,10 @@
       "publishing": "Image Comics"
     },
     {
-      "name": "Sdf",
-      "alias": "Asdf",
-      "publishing": "sadf",
-      "id": "cd905566-984d-4a82-b504-5f90a5743095"
+      "id": "042eeb9a-5055-43ff-88b7-5688fbb69176",
+      "name": "Asdfaaasdf<Zxc",
+      "alias": "Asfasdfasdf",
+      "publishing": "SADFS"
     }
   ]
 }

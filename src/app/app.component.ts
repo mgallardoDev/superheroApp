@@ -8,7 +8,7 @@ import { ChangeDetectorRef } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements AfterViewChecked {
+export class AppComponent {
   title = 'superheroes';
   isLoading$: Observable<boolean>;
 
@@ -18,8 +18,5 @@ export class AppComponent implements AfterViewChecked {
   ) {
     this.isLoading$ = this.loadingService.loading$;
   }
-  ngAfterViewChecked(): void {
-    //con esto evitamos un ExpressionChangedAfterItHasBeenCheckedError aunque el metodo de deteccion sea Default
-    this.cdr.detectChanges();
-  }
+
 }

@@ -70,7 +70,7 @@ export class ListHeroComponent implements OnInit, OnDestroy {
     this.binds.unsubscribe();
   }
 
-  openConfirmationDialog(): void {
+  delteHeroOpenConfirmationDialog(): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -98,6 +98,7 @@ export class ListHeroComponent implements OnInit, OnDestroy {
               message: 'Héroe eliminado con éxito',
               type: 'success',
             });
+            this.selectedHero = null;
           });
       }
     });

@@ -58,15 +58,15 @@ describe('EditHeroComponent', () => {
   });
 
   it('should call getHore in the service based on heroId', () => {
-    mockHeroService.getHero.and.returnValue();
-
+    mockHeroService.getHero.and.returnValue(of(null));
     component.ngOnInit();
-    component.ngAfterViewInit();
-
     expect(mockHeroService.getHero).toHaveBeenCalledWith('1');
   });
 
   it('should show error notification when hero update fails', () => {
+    const { id, ...hero } = mockHero;
+    component.editHeroForm.setValue(hero);
+    component.hero = mockHero
     mockHeroService.updateHero.and.returnValue(throwError(new Error()));
     component.onSaveChanges();
 
@@ -76,7 +76,10 @@ describe('EditHeroComponent', () => {
     });
   });
 
-  it('should show error notification when hero update fails', () => {
+  it('should show success notification on hero update', () => {
+    const { id, ...hero } = mockHero;
+    component.editHeroForm.setValue(hero);
+    component.hero = mockHero
     mockHeroService.updateHero.and.returnValue(of(mockHero));
     component.onSaveChanges();
     expect(mockNotifierService.show).toHaveBeenCalledWith({

@@ -41,7 +41,7 @@ describe('CreateHeroComponent', () => {
     fixture = TestBed.createComponent(CreateHeroComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    
+
     spyOn(component, 'navigateToView').and.callThrough();
 
   });

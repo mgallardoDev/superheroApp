@@ -5,11 +5,14 @@
 
 Gestión de un litado de héroes (que estamos faltos de ellos)
 
-con npm run start:dev, lanzamos tante el mock server como la aplicacion
+con 'npm run start:dev', lanzamos tanto el mock server como la aplicación
 
+## Versiones
+
+He utilizado la version 15LST de angular ya que era la mas alta que indicaba LST, ya que la 16 aun no esta etiquetada como tal.
 ## Uso de Interfaces en lugar de Clases
 
-Para el modelo de datos, hemos optado por usar interfaces en lugar de clases. Esto es debido a que los héroes no necesitan lógica propia. Las interfaces en TypeScript nos proporcionan una forma efectiva de definir la forma de los objetos, garantizando que se cumplan ciertos contratos sin tener que implementar la lógica de una clase.
+Para el modelo de datos, he optado por usar interfaces en lugar de clases. Esto es debido a que los héroes no necesitan lógica propia. Las interfaces en TypeScript nos proporcionan una forma efectiva de definir la forma de los objetos, garantizando que se cumplan ciertos contratos sin tener que implementar la lógica de una clase.
 
 ## Mock Server
 
@@ -17,19 +20,23 @@ La aplicación utiliza un mock server para simular llamadas a una API real. Esto
 
 ## Gestión del Estado
 
-Hemos implementado una pequeña gestión de estado en los servicios. Se decidió no utilizar soluciones más complejas como NgRx porque no era necesario para la naturaleza y el alcance de esta aplicación.
+He implementado una pequeña gestión de estadon usando RxJS en los servicios. decidí no utilizar soluciones más complejas como NgRx porque no era necesario para la naturaleza y el alcance de esta aplicación.
 
 ## Interceptor de Carga
 
-Se ha implementado un interceptor que muestra un spinner de carga cada vez que hay una petición en curso. Esto mejora la experiencia del usuario al proporcionar un feedback visual mientras se espera la respuesta del servidor.
+Se ha implementado un interceptor que muestra un spinner de carga cada vez que hay una petición en curso de creación o edición. Esto mejora la experiencia del usuario al proporcionar un feedback visual mientras se espera la respuesta del servidor. Para poder apreciarlo he configurado en delay en las respuestas del servidor de 500 ms.
 
 ## Directiva para Capitalizar Texto
 
-Hemos creado una directiva que se puede aplicar a los inputs de texto según lo requieran. Esta directiva se encarga de transformar el texto ingresado para que la primera letra de cada palabra esté en mayúsculas.
+He creado una directiva que se puede aplicar a los inputs de texto según se requieran. Esta directiva se encarga de transformar el texto ingresado para que la primera letra de cada palabra esté en mayúsculas.
 
 ## Programación Reactiva
 
 Se ha hecho un uso exhaustivo de la programación reactiva utilizando RxJS. Hemos aplicado este paradigma en prácticamente todas las partes de la aplicación que lo permitían, maximizando los beneficios de trabajar con flujos de datos asíncronos y reactivos.
+
+## Test
+
+Se ha generado una bateria de tests que cubren gran parte del comportamiento y funcionalidades tanto del HeroService como del HeroComponet y sus tres componentes hijos. 
 
 ## Docker
 

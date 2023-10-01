@@ -61,8 +61,7 @@ describe('HeroService', () => {
       publishing: 'D.C. Comics',
     };
 
-    service.getHero('1');
-
+    service.getHero('1').subscribe(() => {});
     const req = httpMock.expectOne(`${service.baseApiUrl}/heroes/1`);
     expect(req.request.method).toBe('GET');
     req.flush(dummyHero);
@@ -80,7 +79,7 @@ describe('HeroService', () => {
     };
 
     service.createHero(heroData).subscribe((hero) => {
-      expect(hero.id).toBeDefined(); // UUID should be assigned
+      expect(hero.id).toBeDefined(); 
       expect(hero.name).toBe(heroData.name);
       expect(hero.alias).toBe(heroData.alias);
     });

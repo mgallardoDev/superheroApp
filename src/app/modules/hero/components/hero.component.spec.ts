@@ -17,10 +17,15 @@ describe('HeroComponent', () => {
   beforeEach(async () => {
     mockHeroService = jasmine.createSpyObj(['searchHeroes']);
     TestBed.configureTestingModule({
-      declarations: [ HeroComponent, ListHeroComponent, CreateHeroComponent, EditHeroComponent ],
+      declarations: [
+        HeroComponent,
+        ListHeroComponent,
+        CreateHeroComponent,
+        EditHeroComponent,
+      ],
       imports: [SharedModule, NotifierModule],
-      providers: [ { provide: HeroService, useValue: mockHeroService }, ]
-    })
+      providers: [{ provide: HeroService, useValue: mockHeroService }],
+    });
 
     fixture = TestBed.createComponent(HeroComponent);
     component = fixture.componentInstance;

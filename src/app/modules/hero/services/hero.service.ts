@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable, catchError, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, delay, of, tap } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 import { HeroState, InitialHeroState } from './hero-state-config';
 import { environment } from 'src/environments/environment';
@@ -42,12 +42,12 @@ export class HeroService {
   }
 
   getHero(id: string) {
-    this.http
+    return this.http
       .get<Hero>(`${this.baseUrl}/heroes/${id}`)
       .pipe(
-        catchError(()=> of(null))
+        catchError(()=> of(null)),
+        tap((hero) => this.setHeroToEdit(hero))
         )
-      .subscribe((hero) => this.setHeroToEdit(hero));
   }
 
   createHero(hero: CreateHeroDto): Observable<Hero> {
@@ -62,12 +62,12 @@ export class HeroService {
     return this.http.put<Hero>(`${this.baseUrl}/heroes/${hero.id}`, hero);
   }
   deleteHero(id: string): Observable<void> {
-    console.log(id);
     return this.http.delete<void>(`${this.baseUrl}/heroes/${id}`).pipe(
       catchError((err) => {
-        console.log(err);
+        console.error(err);
         return new Observable<void>();
-      })
+      }),
+
     );
   }
 
