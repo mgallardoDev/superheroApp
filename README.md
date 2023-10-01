@@ -30,6 +30,12 @@ Se ha implementado un interceptor que muestra un spinner de carga cada vez que h
 
 He creado una directiva que se puede aplicar a los inputs de texto según se requieran. Esta directiva se encarga de transformar el texto ingresado para que la primera letra de cada palabra esté en mayúsculas.
 
+## Validación de formulario
+
+Se han añadido validadores a los tres campos de los dos formularios. En todos los casos, los campos son obligatorios y deben tener un mínimo de tres letras. Cada palabra debe comenzar con una letra, puede contener guiones en medio, pero no se permiten más de uno consecutivo, y cada palabra debe tener un mínimo de tres caracteres.
+
+Además, para el formulario de creación, se ha creado un validador personalizado asíncrono que realiza una llamada al backend para comprobar si ya existe una combinación de nombre y alias idéntica en la base de datos.
+
 ## Programación Reactiva
 
 Se ha hecho un uso exhaustivo de la programación reactiva utilizando RxJS. Hemos aplicado este paradigma en prácticamente todas las partes de la aplicación que lo permitían, maximizando los beneficios de trabajar con flujos de datos asíncronos y reactivos.

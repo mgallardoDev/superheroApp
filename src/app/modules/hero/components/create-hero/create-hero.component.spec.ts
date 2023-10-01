@@ -26,6 +26,7 @@ describe('CreateHeroComponent', () => {
       'createHero',
       'getHero',
       'searchHeroes',
+      'isUniqueNameAliasCombination',
     ]);
     mockNotifierService = jasmine.createSpyObj(['show']);
     await TestBed.configureTestingModule({
@@ -43,7 +44,6 @@ describe('CreateHeroComponent', () => {
     fixture.detectChanges();
 
     spyOn(component, 'navigateToView').and.callThrough();
-
   });
 
   it('should create', () => {
@@ -51,16 +51,17 @@ describe('CreateHeroComponent', () => {
   });
 
   it('should call createHero(), navigate to list view and show success notification on success', () => {
-    const {id, ...newHero } = mockHero
-    component.createHeroForm.setValue(newHero)
-    mockHeroService.createHero.and.returnValue(of(mockHero))
+    mockHeroService.isUniqueNameAliasCombination.and.returnValue(of(true))
+    mockHeroService.createHero.and.returnValue(of(mockHero));
+    const { id, ...newHero } = mockHero;
+    component.createHeroForm.setValue(newHero);
     component.onCreateHero();
     expect(mockHeroService.createHero).toHaveBeenCalled();
     expect(mockNotifierService.show).toHaveBeenCalledWith({
       type: 'success',
       message: 'Héroe creado con éxito',
     });
-    expect(component.navigateToView).toHaveBeenCalledWith('list')
+    expect(component.navigateToView).toHaveBeenCalledWith('list');
   });
 
   it('should unsubscribe from binds on destroy', () => {

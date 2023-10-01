@@ -21,7 +21,7 @@
     {
       "id": "4d6a32e5-ec83-4ff9-bc2f-b162f3bac48f",
       "name": "Barry Allen",
-      "alias": "Flashero",
+      "alias": "Flash",
       "publishing": "DC Comics"
     },
     {
@@ -40,11 +40,6 @@
       "id": "15a9f3ec-e9e6-4b2c-8d1d-c809fc8c6b1b",
       "alias": "Iron Man",
       "name": "Tony Stark",
-      "publishing": "Marvel Comics"
-    },
-    {
-      "id": "5d06ca2c-d5e0-4d22-9669-698cf1f0a830",
-      "alias": "Thor",
       "publishing": "Marvel Comics"
     },
     {
@@ -90,10 +85,10 @@
       "publishing": "Image Comics"
     },
     {
-      "id": "042eeb9a-5055-43ff-88b7-5688fbb69176",
-      "name": "Asdfaaasdf<Zxc",
-      "alias": "Asfasdfasdf",
-      "publishing": "SADFS"
+      "name": "Miles Morales",
+      "alias": "SpiderMan",
+      "publishing": "Marvel",
+      "id": "a213bade-f08e-4281-b599-d545e78f1373"
     }
   ]
 }

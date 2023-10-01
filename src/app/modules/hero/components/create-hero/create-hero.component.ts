@@ -11,6 +11,7 @@ import { HeroService } from '../../services/hero.service';
 import { Hero } from 'src/app/common/models/hero';
 import { NotifierService } from 'angular-notifier';
 import { heroForm } from '../../forms/hero.form';
+import { UniqueNameAliasValidator } from 'src/app/common/validators/unique-name-alias.validator';
 
 @Component({
   selector: 'app-create-hero',
@@ -30,6 +31,9 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
     private notifierService: NotifierService
   ) {
     this.createHeroForm = this.formBuilder.group(heroForm);
+    this.createHeroForm.setAsyncValidators(
+      UniqueNameAliasValidator.createValidator(this.heroService)
+    );
   }
 
   ngOnInit(): void {}
@@ -61,6 +65,15 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
           });
           this.navigateToView('list');
         });
+    } else {
+      console.log(this.createHeroForm)
+
+      if (this.createHeroForm.errors && this.createHeroForm.errors['nameAliasCombinationAlreadyExists'])
+         this.notifierService.show({
+            type: 'error',
+            message:
+              'Ya existe otro heroe con esa combinación de SuperNombre y nombre real',
+          })
     }
     this.createHeroForm.markAllAsTouched();
   }

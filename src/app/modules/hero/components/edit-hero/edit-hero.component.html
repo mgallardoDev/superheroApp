@@ -7,22 +7,41 @@
           <mat-label>SuperNombre</mat-label>
           <input matInput formControlName="alias" appCapitalizeWords />
           <mat-error *ngIf="editHeroForm.get('alias')?.hasError('required')">
-            El SuperNombre es obligatorio.
+            Campo es obligatorio.
+          </mat-error>
+          <mat-error *ngIf="editHeroForm.get('alias')?.hasError('minlength')">
+            Valor demasiado corto.
+          </mat-error>
+          <mat-error *ngIf="editHeroForm.get('alias')?.hasError('pattern')">
+            Formato incorrecto
           </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Nombre Real</mat-label>
           <input matInput formControlName="name" appCapitalizeWords />
+          <mat-error *ngIf="editHeroForm.get('name')?.hasError('required')">
+            Campo es obligatorio.
+          </mat-error>
+          <mat-error *ngIf="editHeroForm.get('name')?.hasError('minlength')">
+            Valor demasiado corto.
+          </mat-error>
+          <mat-error *ngIf="editHeroForm.get('name')?.hasError('pattern')">
+            Formato incorrecto
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Editorial</mat-label>
           <input matInput formControlName="publishing" />
-          <mat-error
-            *ngIf="editHeroForm.get('publishing')?.hasError('required')"
-          >
-            La editorial es obligatoria.
+          <mat-error *ngIf="editHeroForm.get('publishing')?.hasError('required')">
+            Campo es obligatorio.
+          </mat-error>
+          <mat-error *ngIf="editHeroForm.get('publishing')?.hasError('minlength')">
+            Valor demasiado corto.
+          </mat-error>
+          <mat-error *ngIf="editHeroForm.get('publishing')?.hasError('pattern')">
+            Formato incorrecto
           </mat-error>
         </mat-form-field>
       </div>

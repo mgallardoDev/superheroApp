@@ -12,6 +12,7 @@ import { Subscription, catchError, firstValueFrom, of, tap } from 'rxjs';
 import { Hero } from 'src/app/common/models/hero';
 import { HeroService } from '../../services/hero.service';
 import { heroForm } from '../../forms/hero.form';
+import { UniqueNameAliasValidator } from 'src/app/common/validators/unique-name-alias.validator';
 
 @Component({
   selector: 'app-edit-hero',

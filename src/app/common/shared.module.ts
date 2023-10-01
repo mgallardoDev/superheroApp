@@ -13,8 +13,20 @@ import { CapitalizeWordsDirective } from './directives/capitalizate-input.direct
 import { LoadingComponent } from './components/loading/loading.component';
 import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
-  declarations: [ConfirmationDialogComponent, CapitalizeWordsDirective, LoadingComponent],
-  imports: [CommonModule, MatDialogModule, MatButtonModule, MatCardModule,MatProgressSpinnerModule],
+  declarations: [
+    ConfirmationDialogComponent,
+    CapitalizeWordsDirective,
+    LoadingComponent,
+  ],
+  imports: [
+    CommonModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
+    MatInputModule,
+    ReactiveFormsModule,
+  ],
   exports: [
     MatButtonModule,
     MatCardModule,
@@ -25,7 +37,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatDialogModule,
     CapitalizeWordsDirective,
     LoadingComponent,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+  ],
 })
 export class SharedModule {}

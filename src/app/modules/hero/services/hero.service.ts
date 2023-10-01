@@ -1,10 +1,17 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable, catchError, delay, of, tap } from 'rxjs';
+import { Injectable } from '@angular/core';
+import {
+  BehaviorSubject,
+  Observable,
+  catchError,
+  map,
+  of,
+  tap
+} from 'rxjs';
+import { CreateHeroDto, Hero } from 'src/app/common/models/hero';
+import { environment } from 'src/environments/environment';
 import { v4 as uuidv4 } from 'uuid';
 import { HeroState, InitialHeroState } from './hero-state-config';
-import { environment } from 'src/environments/environment';
-import { CreateHeroDto, Hero } from 'src/app/common/models/hero';
 
 @Injectable({
   providedIn: 'root',
@@ -42,12 +49,10 @@ export class HeroService {
   }
 
   getHero(id: string) {
-    return this.http
-      .get<Hero>(`${this.baseUrl}/heroes/${id}`)
-      .pipe(
-        catchError(()=> of(null)),
-        tap((hero) => this.setHeroToEdit(hero))
-        )
+    return this.http.get<Hero>(`${this.baseUrl}/heroes/${id}`).pipe(
+      catchError(() => of(null)),
+      tap((hero) => this.setHeroToEdit(hero))
+    );
   }
 
   createHero(hero: CreateHeroDto): Observable<Hero> {
@@ -66,8 +71,7 @@ export class HeroService {
       catchError((err) => {
         console.error(err);
         return new Observable<void>();
-      }),
-
+      })
     );
   }
 
@@ -84,5 +88,17 @@ export class HeroService {
         this.setHeroList(heroes);
         this.setTotalHeroes(totalCount);
       });
+  }
+
+  isUniqueNameAliasCombination(name: string, alias: string) {
+    const params = new HttpParams().set('alias', alias).set('name', name);
+    return this.http
+      .get<Hero[]>(`${this.baseUrl}/heroes`, { params, observe: 'response' })
+      .pipe(
+        map((response) => {
+          console.log(response);
+          return response.body?.length === 0;
+        })
+      );
   }
 }
