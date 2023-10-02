@@ -13,7 +13,6 @@ export class UniqueNameAliasValidator {
       const name = control.get('name')!.value;
       const alias = control.get('alias')!.value;
 
-      console.log(typeof(name))
 
       return heroService.isUniqueNameAliasCombination(name, alias).pipe(
         map((result: boolean) => {

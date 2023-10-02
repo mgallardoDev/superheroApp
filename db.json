@@ -89,6 +89,24 @@
       "alias": "SpiderMan",
       "publishing": "Marvel",
       "id": "a213bade-f08e-4281-b599-d545e78f1373"
+    },
+    {
+      "name": "Jason Todd",
+      "alias": "Robin",
+      "publishing": "DC Universe",
+      "id": "4fb5d141-e2c2-4af0-b1bc-4aabd6cf1a45"
+    },
+    {
+      "id": "5cfbacfd-7a0d-4cc5-83e5-a2d3cc768980",
+      "name": "Jason Todd",
+      "alias": "Robin",
+      "publishin": "asa"
+    },
+    {
+      "name": "Jason Tod",
+      "alias": "Robin",
+      "publishing": "asd",
+      "id": "fdca92a6-b90e-493d-a78b-ab64254fc7f4"
     }
   ]
 }
